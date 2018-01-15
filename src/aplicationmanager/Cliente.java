@@ -42,7 +42,10 @@ public class Cliente {
         this.nomeCliente = nomeCliente;
     }
     
-    
+    @Override
+    public String toString(){
+        return this.getNomeCliente();
+    }
     
     
     
