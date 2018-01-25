@@ -23,18 +23,21 @@ public class MainFrame extends javax.swing.JFrame {
      * Creates new form MainFrame
      * @throws java.io.IOException
      */
+    
+    Charge charge;
+    List<Cliente> list = new ArrayList<>();
+    JFrameFileChoser jffc;
+    
     public MainFrame() throws IOException {
         initComponents();
         
-        Charge charge = new Charge();
-        charge.LoadClients();
-        //List<Cliente> list = new ArrayList<>();
-
-        for(Cliente c : charge.getList()){
-            
-            cbCliente.addItem(c);
+         this.charge = new Charge();
         
-        }
+        
+        
+        jMenuFile.setVisible(true);
+
+    
        
         
        
@@ -52,19 +55,22 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
         cbCliente = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-
-        jMenu1.setText("jMenu1");
-
-        jMenu2.setText("jMenu2");
-
-        jMenu3.setText("jMenu3");
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenuFile = new javax.swing.JMenu();
+        jMenuImport = new javax.swing.JMenu();
+        jMenuExport = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         cbCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,25 +80,42 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel1.setText("Cliente");
 
+        jMenuFile.setText("File");
+
+        jMenuImport.setText("Importar XLS");
+        jMenuImport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuImportActionPerformed(evt);
+            }
+        });
+        jMenuFile.add(jMenuImport);
+
+        jMenuExport.setText("Exportar XLS");
+        jMenuFile.add(jMenuExport);
+
+        jMenuBar1.add(jMenuFile);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(83, 83, 83)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cbCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE))
-                .addContainerGap(444, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(cbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(365, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         pack();
@@ -105,6 +128,34 @@ public class MainFrame extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_cbClienteActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+        
+        System.exit(0);
+    }//GEN-LAST:event_formWindowClosed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+         
+        System.exit(0);
+    }//GEN-LAST:event_formWindowClosing
+
+    private void jMenuImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuImportActionPerformed
+        // TODO add your handling code here:
+        System.out.println("Aqui01");
+        
+        try{
+            System.out.println("aqui");
+            this.jffc = new JFrameFileChoser();
+            this.jffc.setVisible(true);
+        }catch(IOException e){
+           e.printStackTrace();
+        }
+        
+        
+        
+    }//GEN-LAST:event_jMenuImportActionPerformed
 
     /**
      * @param args the command line arguments
@@ -144,12 +195,17 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void setCBClient(Object obj){
+        this.cbCliente.addItem(obj);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<Object> cbCliente;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jMenuExport;
+    private javax.swing.JMenu jMenuFile;
+    private javax.swing.JMenu jMenuImport;
     // End of variables declaration//GEN-END:variables
 }

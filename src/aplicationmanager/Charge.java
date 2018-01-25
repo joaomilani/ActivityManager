@@ -21,10 +21,14 @@ public class Charge {
     public Charge() throws IOException {
 
         this.ixls = new ImportXLS();
-        ixls.LoadXLS("BaseActivityFile.xls");
+        //ixls.LoadXLS();
         this.list = new ArrayList<>();
     }
 
+    public void ChargeFile(String path){
+        this.ixls.LoadXLS(path);
+    }
+    
     public void LoadClients() throws IOException {
 
         this.getList().addAll(this.ixls.ReadClientes());
