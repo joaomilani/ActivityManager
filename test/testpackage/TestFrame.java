@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package InterfaceManager;
+package testpackage;
 
+import InterfaceManager.*;
 import aplicationmanager.Cliente;
 import aplicationmanager.ImportXLS;
 import aplicationmanager.TipoAtividade;
@@ -19,13 +20,13 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author joao
  */
-public class MainFrame extends javax.swing.JFrame {
+public class TestFrame extends javax.swing.JFrame {
 
     public ImportXLS xls;
     List<Cliente> listaClientes;
     List<TipoAtividade> listaTipoAtividade;
 
-    public MainFrame() {
+    public TestFrame() {
         initComponents();
 
     }
@@ -170,18 +171,18 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
 
-        JFileChooser jfc = new JFileChooser();
-        jfc.setDialogTitle("Selecionar arquivo a importar");
-        jfc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+//        JFileChooser jfc = new JFileChooser();
+//        jfc.setDialogTitle("Selecionar arquivo a importar");
+//        jfc.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("planilha", "xls", "xlsx");
+//        FileNameExtensionFilter filter = new FileNameExtensionFilter("planilha", "xls", "xlsx");
 
-        jfc.setFileFilter(filter);
-
-        jfc.showOpenDialog(this);
+//        jfc.setFileFilter(filter);
+//
+//        jfc.showOpenDialog(this);
 
         this.xls = new ImportXLS();
-        xls.build(jfc.getSelectedFile().getPath());
+        xls.build("/home/joao/Projetos/ActivityManager/BaseActivityFile.xls");
         
         CarregaComboBoxes();
 
@@ -248,6 +249,11 @@ public class MainFrame extends javax.swing.JFrame {
             
         }
         
+        this.xls = new ImportXLS();
+        xls.build("/home/joao/Projetos/ActivityManager/BaseActivityFile.xls");
+
+        
+
          //...TipoAtividade
         try {
             this.listaTipoAtividade = xls.getTipoAtividade();
@@ -260,10 +266,12 @@ public class MainFrame extends javax.swing.JFrame {
         int i = 1;
         for(TipoAtividade t : listaTipoAtividade){
             
-            //cbTipoAtividade.addItem(t.getNomeTipo());
-            cbTipoAtividade.addItem("teste"+i);
+            cbTipoAtividade.addItem(t.getNomeTipo());
+//            cbTipoAtividade.addItem("teste"+i);
+//            System.out.println("TESTE "+t.getNomeTipo().toString());
             
         }
+        
         
         
         
